@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Pertanyaan 2</title>
+  <style>
+    body {
+      background: url('galery 1.jpg') no-repeat center center fixed;
+      background-size: cover;
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-family: Arial, sans-serif;
+    }
+
+    .container {
+      text-align: center;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 20px;
+      border-radius: 10px;
+      width: 80%;
+      max-width: 500px;
+    }
+
+    input {
+      width: 90%;
+      padding: 10px;
+      margin-top: 10px;
+      border: none;
+      border-bottom: 2px solid white;
+      font-size: 16px;
+      text-align: center;
+      background: none;
+      color: white;
+      outline: none;
+    }
+
+    button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 15px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      margin: 5px;
+      border-radius: 50px;
+      width: 120px;
+      height: 50px;
+    }
+
+    button:hover {
+      opacity: 0.8;
+    }
+
+    #error-message {
+      color: #ff0000;
+      font-size: 14px;
+      margin-top: 10px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Pertanyaan 2</h1>
+    <p>Siapa nama pasanganmu (Nama Panjang)?</p>
+    
+    <input type="text" id="jawaban" maxlength="100" oninput="formatInput(this)">
+    <p id="error-message">Minimal 10 karakter</p>
+    
+    <button onclick="jawab()">Kirim</button>
+  </div>
+
+  <script>
+    function formatInput(input) {
+      // Hanya izinkan huruf dan spasi
+      input.value = input.value.replace(/[^a-zA-Z\s]/g, ''); 
+      checkInput();
+    }
+
+    function checkInput() {
+      let jawaban = document.getElementById('jawaban').value.trim();
+      let errorMessage = document.getElementById('error-message');
+
+      if (jawaban.length < 10) {
+        errorMessage.style.display = "block"; // Tampilkan pesan error
+      } else {
+        errorMessage.style.display = "none"; // Sembunyikan pesan error
+      }
+    }
+
+    function jawab() {
+      let jawaban = document.getElementById('jawaban').value.trim();
+      let errorMessage = document.getElementById('error-message');
+
+      if (jawaban.length < 10) {
+        errorMessage.style.display = "block"; // Tampilkan pesan error jika tidak valid
+        return;
+      }
+
+      // Simpan jawaban ke localStorage
+      localStorage.setItem("jawaban2", jawaban);
+
+      // Redirect ke halaman hasil
+      window.location.href = 'hasil.html';
+    }
+  </script>
+</body>
+</html>

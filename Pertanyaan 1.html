@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Pertanyaan 1</title>
+  <style>
+    body {
+      background: url('galery 1.jpg') no-repeat center center fixed;
+      background-size: cover;
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-family: Arial, sans-serif;
+    }
+
+    .container {
+      text-align: center;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 20px;
+      border-radius: 10px;
+      width: 80%;
+      max-width: 500px;
+    }
+
+    input {
+      width: 90%;
+      padding: 10px;
+      margin-top: 10px;
+      border: none;
+      border-bottom: 2px solid white;
+      font-size: 16px;
+      text-align: center;
+      background: none;
+      color: white;
+      outline: none;
+    }
+
+    button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 15px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      margin: 5px;
+      border-radius: 50px;
+      width: 120px;
+      height: 50px;
+    }
+
+    button:hover {
+      opacity: 0.8;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Pertanyaan 1</h1>
+    <p>Kapan pertama kali Anda kenal dia?</p>
+    <input type="text" id="jawaban" maxlength="10" oninput="formatInput(this)" placeholder="DD-MM-YYYY">
+    
+    <button onclick="jawab()">Kirim</button>
+  </div>
+
+  <script>
+    function formatInput(input) {
+      // Hanya izinkan angka dan tanda "-"
+      input.value = input.value.replace(/[^0-9\-]/g, '');
+      
+      // Batasi panjang input menjadi 10 karakter
+      if (input.value.length > 10) {
+        input.value = input.value.slice(0, 10);
+      }
+
+      // Tambahkan "-" secara otomatis setelah tanggal dan bulan
+      if (input.value.length === 2 || input.value.length === 5) {
+        if (!input.value.endsWith('-')) {
+          input.value += '-';
+        }
+      }
+    }
+
+    function jawab() {
+      let jawaban = document.getElementById('jawaban').value.trim();
+      let regex = /^\d{2}-\d{2}-\d{4}$/;
+
+      if (!regex.test(jawaban)) {
+        alert("Mohon isi dengan format DD-MM-YYYY!");
+        return;
+      }
+
+      // Simpan jawaban ke localStorage
+      localStorage.setItem("jawaban", jawaban);
+
+      // Pindah ke halaman hasil
+      window.location.href = 'hasil.html';
+    }
+  </script>
+</body>
+</html>

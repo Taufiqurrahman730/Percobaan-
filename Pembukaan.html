@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Selamat Datang</title>
+  <style>
+    @font-face {
+      font-family: 'MainFont';
+      src: url('Pieces_of_Eight.ttf') format('truetype');
+    }
+
+    @font-face {
+      font-family: 'ButtonFont';
+      src: url('Bitshow.otf') format('opentype');
+    }
+
+    body {
+      background: url('galery 1.jpg') no-repeat center center fixed;
+      background-size: cover;
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-family: 'MainFont', Arial, sans-serif;
+    }
+
+    .container {
+      text-align: center;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 20px;
+      border-radius: 10px;
+      width: 80%;
+      max-width: 500px;
+    }
+
+    .buttons {
+      margin-top: 20px;
+    }
+
+    button {
+      background-color: #28a745;
+      color: white;
+      border: none;
+      padding: 15px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      margin: 5px;
+      border-radius: 50px;
+      width: 100px;
+      height: 50px;
+      text-transform: uppercase;
+      font-weight: bold;
+      font-family: 'ButtonFont';
+    }
+
+    button.no {
+      background-color: #dc3545;
+    }
+
+    button:hover {
+      opacity: 0.8;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Selamat Datang!</h1>
+    <p>Apakah Anda siap diuji?</p>
+    <p>Tekan "YA" jika siap, tekan "TIDAK" jika tidak siap.</p>
+    
+    <div class="buttons">
+      <button onclick="jawab('ya')">YA</button>
+      <button class="no" onclick="jawab('tidak')">TIDAK</button>
+    </div>
+  </div>
+
+  <script>
+    function jawab(pilihan) {
+      if (pilihan === 'ya') {
+        window.location.href = 'pertanyaan_1.html';
+      } else {
+        alert('Yah, sayang sekali! Mungkin lain kali.');
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Hasil Jawaban</title>
+  <style>
+    body {
+      background: url('galery 1.jpg') no-repeat center center fixed;
+      background-size: cover;
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-family: Arial, sans-serif;
+    }
+
+    .container {
+      text-align: center;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 20px;
+      border-radius: 10px;
+      width: 80%;
+      max-width: 500px;
+    }
+
+    button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 15px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      margin: 5px;
+      border-radius: 50px;
+      width: 180px;
+      height: 50px;
+    }
+
+    button:hover {
+      opacity: 0.8;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Hasil Jawaban</h1>
+    <p id="hasil"></p>
+
+    <div>
+      <button onclick="printHasil()">Print</button>
+      <button onclick="downloadPDF()">PDF</button>
+      <button onclick="downloadWord()">Word</button>
+      <button onclick="downloadJPG()">JPG</button>
+    </div>
+  </div>
+
+  <script>
+    // Ambil data jawaban dari localStorage
+    let jawaban1 = localStorage.getItem("jawaban") || "Tidak ada jawaban";
+    let jawaban2 = localStorage.getItem("jawaban2") || "Tidak ada jawaban";
+
+    // Tampilkan hasil
+    document.getElementById("hasil").innerText = "Jawaban Anda:\n1. Tanggal Kenal: " + jawaban1 + "\n2. Nama Pasangan: " + jawaban2;
+
+    function printHasil() {
+      window.print();
+    }
+
+    function downloadPDF() {
+      import('https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js').then(({ jsPDF }) => {
+        let doc = new jsPDF();
+        doc.text("Hasil Jawaban:\n\n1. Tanggal Kenal: " + jawaban1 + "\n2. Nama Pasangan: " + jawaban2, 20, 30);
+        doc.save("hasil.pdf");
+      });
+    }
+
+    function downloadWord() {
+      let text = "Hasil Jawaban:\n\n1. Tanggal Kenal: " + jawaban1 + "\n2. Nama Pasangan: " + jawaban2;
+      let blob = new Blob([text], { type: "application/msword" });
+      let link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = "hasil.doc";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+
+    function downloadJPG() {
+      import('https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js').then(({ default: html2canvas }) => {
+        html2canvas(document.body).then(canvas => {
+          let link = document.createElement("a");
+          link.href = canvas.toDataURL("image/jpeg");
+          link.download = "hasil.jpg";
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+        });
+      });
+    }
+  </script>
+</body>
+</html>
